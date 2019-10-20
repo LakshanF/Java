@@ -7,7 +7,7 @@ public class RotateMatrix{
     public static void main(String[] args) {
         int[][] A = GetMatrix(5);
         PrintMatrix(A);
-        int[][] B = Rotate(A);
+        int[][] B = RotateOld(A);
         System.out.println();
         PrintMatrix(B);
     }
@@ -23,7 +23,32 @@ public class RotateMatrix{
         return A;
     }
 
-    static int[][] Rotate(int[][] A){
+    /** This method rotates the matrix in place
+     *  There are 4 points that are impacted by a rotate: 0=>90=>180=>270=>0
+     *  We will therefore use a temporary buffer  to store the 4 points impacted by a rotation
+     *  We also will consider concentric squares of the matrix starting from the outermost
+     *  There will be floor[n/2] iterations of concentric squares
+     * 
+     * @param A - Matrix to be transponsed
+     */
+    static void Rotate(int[][] A){
+        int n = A.length;
+        int[] tempVAlues = new int[4];
+        for(int i = 0, z = (n - i); i< Math.floor(n); i++, z--){
+            //looking at each square matrix in concentric circles
+            for(int j = (i + 0), y = (n - i); j < (n - i); j++, y--){
+                //save the points that are to be rotated in a temp buffer
+                //for(int k = 0; k <4; k++){
+                tempVAlues[0] = A[i][j];
+                tempVAlues[1] = A[i][k];
+                tempVAlues[2] = A[i][j];
+                tempVAlues[3] = A[i][j];
+                //}
+            }
+        }
+    }
+
+    static int[][] RotateOld(int[][] A){
         int n=A.length;
         int[][] B = new int[n][n];
         for(int i = 0; i < n; i++){
