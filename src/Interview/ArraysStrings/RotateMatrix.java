@@ -5,14 +5,22 @@
 
 public class RotateMatrix{
     public static void main(String[] args) {
-        int[][] A = GetMatrix(5);
+        int[][] A = GetSampleMatrix(3);
         PrintMatrix(A);
-        int[][] B = RotateOld(A);
         System.out.println();
-        PrintMatrix(B);
+
+        //int[][] B = RotateOld(A);
+        RotateInPlace(A);
+
+        PrintMatrix(A);
     }
 
-    static int[][] GetMatrix(int n){
+    /**
+     * Gets a sample matrix for testing purposes initialized with sequential values
+     * @param n
+     * @return
+     */
+    static int[][] GetSampleMatrix(int n){
         int[][] A = new int[n][n];
         int value = 1;
         for(int i = 0; i < n; i++){
@@ -31,23 +39,32 @@ public class RotateMatrix{
      * 
      * @param A - Matrix to be transponsed
      */
-    static void Rotate(int[][] A){
+    static void RotateInPlace(int[][] A){
         int n = A.length;
-        int[] tempVAlues = new int[4];
-        for(int i = 0, z = (n - i); i< Math.floor(n); i++, z--){
+        int[] tempValues = new int[4];
+        for(int i = 0, z = (n - i - 1); i< Math.floor(n/2); i++, z--){
             //looking at each square matrix in concentric circles
-            for(int j = (i + 0), y = (n - i); j < (n - i); j++, y--){
+            for(int j = (i + 0), y = (n - j - 1); j < (n - i - 1); j++, y--){
                 //save the points that are to be rotated in a temp buffer
-                //for(int k = 0; k <4; k++){
-                tempVAlues[0] = A[i][j];
-                tempVAlues[1] = A[i][k];
-                tempVAlues[2] = A[i][j];
-                tempVAlues[3] = A[i][j];
-                //}
+                tempValues[0] = A[i][j];
+                tempValues[1] = A[j][z];
+                tempValues[2] = A[z][y];
+                tempValues[3] = A[y][i];
+
+                A[i][j] = tempValues[3];
+                A[j][z] = tempValues[0];
+                A[z][y] = tempValues[1];
+                A[y][i] = tempValues[2];
+
             }
         }
     }
 
+    /**
+     * Rotates to a new matric
+     * @param A
+     * @return
+     */
     static int[][] RotateOld(int[][] A){
         int n=A.length;
         int[][] B = new int[n][n];
