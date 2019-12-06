@@ -4,7 +4,7 @@
 #                                                             #
 # EDIT CONFIGURATION HERE                                     #
 #                                                             #
-$INGRESS_TOKEN = "" ;             # eg. "u4267Q9J07-G9gx35IvngOA" - gotten from the CLR CAP team
+$INGRESS_TOKEN = "" ;             # eg. "JF281lsnEUGARvYv96x7vg" - gotten from the CLR CAP team
 $TAGS = "";                       # ';' seperated list of tags: eg. "TAG1;TAG2";
 $LOOP_WAIT_SECONDS = 28800;       # 8 hours
 $TRACE_COLLECTION_DURATION = 900; # 15 minutes
@@ -52,8 +52,8 @@ while(true)
 	$tracename = $machinename . "_" . $date;
 
 	# collect trace
-	print "./perfcollect collect $tracename -collectsec $TRACE_COLLECTION_DURATION $EVENTS\n";
-	`./perfcollect collect $tracename -collectsec $TRACE_COLLECTION_DURATION $EVENTS`;
+	print "./perfcollect collect $tracename -collectsec $TRACE_COLLECTION_DURATION\n";
+	`./perfcollect collect $tracename -collectsec $TRACE_COLLECTION_DURATION`;
 
 	# gather current process list (to coorelate for long running processes)
 	$ps = `ps -eo pid,command | grep -i "dotnet "`;
