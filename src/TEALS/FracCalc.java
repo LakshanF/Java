@@ -1,8 +1,76 @@
 public class FracCalc  {
     public static void main(String[] args) {
-        System.out.println(produceAnswer("5_3/4 + 6_5/8"));
+        //System.out.println(produceAnswer("5_3/4 + 6_5/8"));
+        //System.out.println(AddTwoNumbers(3, 1, 2, 2, 3, 4));
+        System.out.println(produceAnswer2("5_3/4 + 6_5/8"));
     }
 
+    // This function takes two fractions (with integer parts) and adds them and returns the result in a string form
+    //
+    // input is a fraction string that needs to be evaluated.  
+    //      e.g. input ==> "3_1/2 + 2_3/4", the parameters to this method will be
+    //              3, 1, 2, 2, 3, 4
+    //        
+    // The function should return the result of the fraction after it has been calculated
+    //      e.g. return ==> "6_1/4"
+    public static String AddTwoNumbers(int whole1, int num1, int den1, int whole2, int num2, int den2){
+        //code to add 2 numbers and return a string
+        num1 += den1*whole1;
+        num2 += den2*whole2;
+        int num = num1*den2 + num2*den1;
+        int den=den1*den2;
+        int gcd = GetGcd(num, den);
+        num /= gcd;
+        den /= gcd;
+        int whole = num/den;
+        num %=den;
+
+        return whole + "_" + num + "/" + den;
+    }
+
+    public static String produceAnswer2(String input){ 
+// TODO: Implement this function to produce the solution to the input
+int firstSpace = input.indexOf(' ');
+String firstWord = input.substring(0 , firstSpace);
+String leftoverEquation = input.substring(firstSpace + 1);
+firstSpace = leftoverEquation.indexOf(' ');
+String manipulator = leftoverEquation.substring(0 , firstSpace);
+String finalSecondWord = leftoverEquation.substring(firstSpace + 1);
+int underscoreSearch = finalSecondWord.indexOf("_");
+String wholeNumberFinal = "";
+String numerator = "";
+String denominator = "";
+int slashSearch = finalSecondWord.indexOf("/");
+if(underscoreSearch == -1 && slashSearch == -1)
+{
+wholeNumberFinal = finalSecondWord;
+}
+else if(underscoreSearch != -1 && slashSearch != -1)
+{
+wholeNumberFinal = finalSecondWord.substring(0 , underscoreSearch);
+}
+else if(underscoreSearch == -1 && slashSearch != -1)
+{
+wholeNumberFinal = "0";
+}
+
+if(slashSearch == -1)
+{
+numerator = "0";
+denominator = "1";
+}
+else if(slashSearch != -1)
+{
+numerator = finalSecondWord.substring(underscoreSearch + 1, slashSearch );
+}
+if(slashSearch != -1)
+{
+denominator = finalSecondWord.substring(slashSearch + 1);
+}
+String answer = "whole:" + wholeNumberFinal + " numerator:" + numerator + " denominator:" + denominator;
+return answer;
+
+    }
 
 // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
     // This function takes a String 'input' and produces the result
@@ -169,6 +237,17 @@ public class FracCalc  {
     private static long CalculateGCD(long a, long b) {
         while(b > 0){
             long temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+
+    // https://en.wikipedia.org/wiki/Euclidean_algorithm
+    private static int GetGcd(int a, int b) {
+        while(b > 0){
+            int temp = b;
             b = a % b;
             a = temp;
         }
