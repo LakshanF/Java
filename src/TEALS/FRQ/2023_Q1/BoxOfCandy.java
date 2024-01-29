@@ -6,17 +6,33 @@ public class BoxOfCandy {
     }
 
     public boolean moveCandyToFirstRow(int col) {
-      if(box[0][col] != null)
-        return true;
+      // 1) Check the first row, col => If a candy is found return true
+      // 2) Walk down the column to see if there is a candy in a row:
+      // 3) IF we find it, move it to the first row, make sure the old candy is no longer there, return true
+      // 4) return false
 
-      for(int row = 1; row < box.length; row++) {
+      if(box[0][col] != null) {
+        return true;
+      }
+
+      for(int row = box.length - 1; row > 0; row--) {
         if(box[row][col] != null) {
           box[0][col] = box[row][col];
           box[row][col] = null;
           return true;
         }
       }
+
+      // for(int row = 1; row < box.length; row++) {
+      //   if(box[row][col] != null) {
+      //     box[0][col] = box[row][col];
+      //     box[row][col] = null;
+      //     return true;
+      //   }
+      // }
+
       return false;
+
     }
 
     public Candy removeNextByFlavor(String flavor) {

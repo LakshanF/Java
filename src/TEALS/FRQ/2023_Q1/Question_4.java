@@ -1,11 +1,9 @@
 public class Question_4 {
     public static void main(String[] args) {
-  
-      
-      //check2DArrayAccess();
+      check2DArrayAccess();
 
       // partA();
-      partB();
+      // partB();
       
     }
 
@@ -35,7 +33,7 @@ public class Question_4 {
       showCell(choc);
       showCandyBox(candy);
       System.out.println();
-      
+
     }
 
     private static void showCell(Candy choc) {
