@@ -1,11 +1,23 @@
 public class Question_4 {
     public static void main(String[] args) {
-      check2DArrayAccess();
+
+      U6L3();
+
+      // check2DArrayAccess();
 
       // partA();
       // partB();
       
     }
+
+    private static void U6L3() {
+      Integer a = new Integer(3);
+      Integer b = new Integer(2);
+      Double c = new Double(1.5);
+      Double d = new Double(2.5);
+      Double result = (a + b) / (c + d);
+      
+      System.out.println(result);    }
 
     private static void partB() {
       Candy[][] candy = {

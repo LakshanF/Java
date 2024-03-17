@@ -15,7 +15,7 @@ public class BoxOfCandy {
         return true;
       }
 
-      for(int row = box.length - 1; row > 0; row--) {
+      for(int row = 1; row < box.length; row++) {
         if(box[row][col] != null) {
           box[0][col] = box[row][col];
           box[row][col] = null;
@@ -23,7 +23,8 @@ public class BoxOfCandy {
         }
       }
 
-      // for(int row = 1; row < box.length; row++) {
+      // Traversing from the end
+      // for(int row = box.length - 1; row > 0; row--) {
       //   if(box[row][col] != null) {
       //     box[0][col] = box[row][col];
       //     box[row][col] = null;
